@@ -41,6 +41,12 @@ public class GameBoard {
 
     }
 
+    /**
+     * Checks a neighboring tiles and returns a number of alive ones.
+     * Excludes the checked tile.
+     * @param tile
+     * @return number of alive tiles.
+     */
     public int checkNeighbors(Tile tile) {
         int tileX = tile.getX(), tileY = tile.getY(), aliveCount = 0;
 
