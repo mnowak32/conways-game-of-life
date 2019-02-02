@@ -1,25 +1,25 @@
 package com.codecool.gameoflife.model;
 
 public class GameBoard {
-    Tile[][] board;
+    Cell[][] board;
 
-    public Tile[][] getBoard() {
+    public Cell[][] getBoard() {
         return board;
     }
 
-    public Tile getTileAt(int x, int y) {
+    public Cell getTileAt(int x, int y) {
         return this.board[x][y];
     }
 
     public GameBoard(int width, int height) {
-        this.board = new Tile[width][height];
+        this.board = new Cell[width][height];
         this.populateTiles();
     }
 
     private void populateTiles() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                board[i][j] = new Tile(i, j);
+                board[i][j] = new Cell(i, j);
             }
         }
     }
@@ -42,17 +42,18 @@ public class GameBoard {
     }
 
     /**
-     * Checks a neighboring tiles and returns a number of alive ones.
-     * Excludes the checked tile.
-     * @param tile
-     * @return number of alive tiles.
+     * Checks a neighboring cells and returns a number of alive ones.
+     * Excludes the checked cell.
+     * @param cellX - the X position of cell to check
+     * @param cellY - the Y position of cell to check
+     * @return number of alive cells.
      */
-    public int checkNeighbors(Tile tile) {
-        int tileX = tile.getX(), tileY = tile.getY(), aliveCount = 0;
+    public int checkNeighbors(int cellX, int cellY) {
+        int aliveCount = 0;
 
         for (int offsetX = -1; offsetX < 2; offsetX++) {
             for (int offsetY = -1; offsetY < 2; offsetY++) {
-                int neighborX = tileX + offsetX, neighborY = tileY + offsetY;
+                int neighborX = cellX + offsetX, neighborY = cellY + offsetY;
 
                 if (neighborX < 0 || neighborX > this.board[0].length ||
                     neighborY < 0 || neighborY > this.board.length ||

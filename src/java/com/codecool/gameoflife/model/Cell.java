@@ -1,6 +1,6 @@
 package com.codecool.gameoflife.model;
 
-public class Tile {
+public class Cell {
 
     private int x;
     private int y;
@@ -18,7 +18,7 @@ public class Tile {
         return alive;
     }
 
-    public Tile(int x, int y) {
+    public Cell(int x, int y) {
         this.alive = true;
         this.x = x;
         this.y = y;
@@ -26,6 +26,7 @@ public class Tile {
 
     @Override
     public String toString() {
-        return String.format("Tile at x: %s, y: %s", this.x, this.y);
+        String status = this.alive ? "Alive" : "Dead";
+        return String.format("%s TILE at x: %s, y: %s", status, this.x, this.y);
     }
 }
