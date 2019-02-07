@@ -55,8 +55,8 @@ public class GameBoard {
             for (int offsetY = -1; offsetY < 2; offsetY++) {
                 int neighborX = cellX + offsetX, neighborY = cellY + offsetY;
 
-                if (neighborX < 0 || neighborX > this.board[0].length ||
-                    neighborY < 0 || neighborY > this.board.length ||
+                if (neighborX < 0 || neighborX > this.board[0].length - 1||
+                    neighborY < 0 || neighborY > this.board.length - 1 ||
                     offsetX == 0 && offsetY ==0) {
                     continue;
                 }
@@ -68,4 +68,6 @@ public class GameBoard {
         }
         return aliveCount;
     }
+
+
 }
