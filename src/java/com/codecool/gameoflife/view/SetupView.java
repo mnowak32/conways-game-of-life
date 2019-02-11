@@ -3,6 +3,7 @@ package com.codecool.gameoflife.view;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -16,6 +17,8 @@ public class SetupView extends VBox {
     private Slider speedSlider;
 
     SetupView() {
+        super(10);
+        this.setPadding(new Insets(25));
         this.startButton = new Button("Start");
         this.randomizeButton = new Button("Randomize grid");
         this.speedLabel = new Label("Speed");

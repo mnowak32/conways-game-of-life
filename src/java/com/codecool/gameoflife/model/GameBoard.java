@@ -19,7 +19,7 @@ public class GameBoard {
     private void populateTiles() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                board[i][j] = new Cell(i, j);
+                board[i][j] = new Cell();
             }
         }
     }
@@ -36,15 +36,15 @@ public class GameBoard {
         Cell [][] nextGen = new Cell[this.board.length][this.board[0].length];
         for (int i = 0; i < nextGen.length; i++) {
             for (int j = 0; j < nextGen[i].length; j++) {
-                nextGen[i][j] = new Cell(i,j, this.cellLived(this.board[i][j]));
+                nextGen[i][j] = new Cell(this.cellLived(i, j));
             }
         }
         this.board =  nextGen;
     }
 
-    private boolean cellLived(Cell cell) {
-        int neighborsNumber = checkNeighbors(cell.getX(), cell.getY());
-        if (cell.isAlive()) {
+    private boolean cellLived(int x, int y) {
+        int neighborsNumber = checkNeighbors(x, y);
+        if (this.board[x][y].isAlive()) {
             return neighborsNumber == 2 || neighborsNumber == 3;
         } else {
             return neighborsNumber == 3;
