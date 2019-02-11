@@ -7,8 +7,8 @@ public class GameBoard {
         return board;
     }
 
-    public GameBoard(int width, int height) {
-        this.board = new Cell[width][height];
+    public GameBoard(int boardSide) {
+        this.board = new Cell[boardSide][boardSide];
         this.populateTiles();
     }
 

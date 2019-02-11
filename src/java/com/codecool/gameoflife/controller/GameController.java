@@ -6,7 +6,7 @@ import com.codecool.gameoflife.view.GameView;
 
 public class GameController {
 
-    private GameBoard gameBoard = new GameBoard(Config.BOARD_SIDE,Config.BOARD_SIDE);
+    private GameBoard gameBoard = new GameBoard(Config.BOARD_SIDE);
     private GameView gameView = new GameView();
 
     public GameController() {
