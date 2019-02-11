@@ -8,5 +8,5 @@ public class DisplayConfig {
 
     public static final double SCREEN_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.8;
     public static final double SCREEN_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().getHeight() * 0.8;
-    public static final double CELL_SIDE = SCREEN_WIDTH / Config.BOARD_SIDE * 0.5;
+    public static final int CELL_SIDE = (int) (SCREEN_WIDTH / Config.BOARD_SIDE * 0.5);
 }
