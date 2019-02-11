@@ -16,12 +16,8 @@ public class GameBoard {
         this.populateTiles();
     }
 
-    private void populateTiles() {
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                board[i][j] = new Cell(i, j);
-            }
-        }
+    public GameBoard(Cell[][] board) {
+        this.board = board;
     }
 
     public void showBoard() {
