@@ -19,7 +19,11 @@ public class Cell {
     }
 
     public Cell(int x, int y) {
-        this.alive = true;
+        this(x, y, true);
+    }
+
+    public Cell(int x, int y, boolean alive) {
+        this.alive = alive;
         this.x = x;
         this.y = y;
     }
