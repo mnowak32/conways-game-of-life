@@ -1,14 +1,10 @@
 package com.codecool.gameoflife.model;
 
 public class GameBoard {
-    Cell[][] board;
+    private Cell[][] board;
 
     public Cell[][] getBoard() {
         return board;
-    }
-
-    public Cell getTileAt(int x, int y) {
-        return this.board[x][y];
     }
 
     public GameBoard(int width, int height) {
@@ -20,7 +16,7 @@ public class GameBoard {
         this.board = board;
     }
 
-    public void populateTiles() {
+    private void populateTiles() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 board[i][j] = new Cell(i, j);
@@ -32,10 +28,19 @@ public class GameBoard {
         Cell [][] nextGen = new Cell[this.board.length][this.board[0].length];
         for (int i = 0; i < nextGen.length; i++) {
             for (int j = 0; j < nextGen[i].length; j++) {
-                nextGen[i][j] = new Cell(i,j);
+                nextGen[i][j] = new Cell(i,j, this.cellLived(this.board[i][j]));
             }
         }
         this.board =  nextGen;
+    }
+
+    private boolean cellLived(Cell cell) {
+        int neighborsNumber = checkNeighbors(cell.getX(), cell.getY());
+        if (cell.isAlive()) {
+            return neighborsNumber == 2 || neighborsNumber == 3;
+        } else {
+            return neighborsNumber == 3;
+        }
     }
 
     /**
