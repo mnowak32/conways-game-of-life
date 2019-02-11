@@ -15,7 +15,6 @@ public class GameController {
     public void setGameView(GameView gameView) {
         this.gameView = gameView;
         this.gameView.updateView(gameBoard.getBoard());
-        this.gameBoard.setGameObserver(this.gameView);
     }
 
     public GameView getGameView() {
