@@ -19,7 +19,7 @@ public class Cell {
     }
 
     public Cell(int x, int y) {
-        this(x, y, true);
+        this(x, y, false);
     }
 
     public Cell(int x, int y, boolean alive) {
