@@ -5,21 +5,21 @@ import javafx.animation.AnimationTimer;
 public class GameLoop extends AnimationTimer {
 
     private long previousTime = System.nanoTime();
-    private long delayInMs;
+    private long delay;
     private FrameAction action;
 
     GameLoop(int delayInMs, FrameAction action) {
-        this.delayInMs = delayInMs * 1_000_000; // to nano seconds
+        this.delay = delayInMs * 1_000_000; // to nano seconds
         this.action = action;
     }
 
     public void setDelay(int delayInMs) {
-        this.delayInMs = delayInMs * 1_000_000;
+        this.delay = delayInMs * 1_000_000;
     }
 
     @Override
     public void handle(long now) {
-        if (now - previousTime < delayInMs) {
+        if (now - previousTime < delay) {
             return;
         }
         action.run();

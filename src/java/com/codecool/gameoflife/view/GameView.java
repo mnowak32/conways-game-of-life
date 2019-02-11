@@ -13,10 +13,15 @@ public class GameView extends HBox {
 
     public GameView(GameController gameController) {
         this.gameController = gameController;
-        this.gameAnimation = new GameLoop(1000, gameController::nextGeneration);
+        this.gameAnimation = new GameLoop(200, gameController::nextGeneration);
         this.setupView.setupStartButton(event -> this.startGame(), "Start Game");
         this.setupView.setupRandomizeButton(event -> this.gameController.randomizeGrid());
+        this.setupView.setupSlider((observable, oldValue, newValue) -> this.changeGameSpeed(newValue.intValue()));
         this.getChildren().addAll(gameBoardView, setupView);
+    }
+
+    private void changeGameSpeed(int gameDelay) {
+        this.gameAnimation.setDelay(gameDelay);
     }
 
     public void updateView(Cell[][] gameBoard) {
