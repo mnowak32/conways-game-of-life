@@ -20,15 +20,10 @@ public class GameBoard {
         this.board = board;
     }
 
-    public void showBoard() {
+    public void populateTiles() {
         for (int i = 0; i < board.length; i++) {
-            System.out.println();
             for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j].isAlive()) {
-                    System.out.print(String.format(" %s.%s ", i ,j));
-                } else {
-                    System.out.print(" ... ");
-                }
+                board[i][j] = new Cell(i, j);
             }
         }
     }
