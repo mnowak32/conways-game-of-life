@@ -19,7 +19,15 @@ public class GameBoard {
     private void populateTiles() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                board[i][j] = new Cell(i, j, Math.random() > 0.5);
+                board[i][j] = new Cell(i, j);
+            }
+        }
+    }
+
+    public void randomizeBoard() {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                board[i][j].setAlive(Math.random() > 0.5);
             }
         }
     }

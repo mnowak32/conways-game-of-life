@@ -33,4 +33,8 @@ public class Cell {
         String status = this.alive ? "Alive" : "Dead";
         return String.format("%s TILE at x: %s, y: %s", status, this.x, this.y);
     }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
 }
