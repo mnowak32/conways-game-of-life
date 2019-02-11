@@ -20,6 +20,7 @@ public class SetupView extends VBox {
         this.randomizeButton = new Button("Randomize grid");
         this.speedLabel = new Label("Speed");
         this.speedSlider = new Slider(0, 400, 200);
+        this.speedSlider.setShowTickLabels(true);
         this.getChildren().addAll(startButton, randomizeButton, speedLabel, speedSlider);
     }
 

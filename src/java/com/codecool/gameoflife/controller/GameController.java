@@ -30,4 +30,9 @@ public class GameController {
         this.gameBoard.randomizeBoard();
         this.gameView.updateView(this.gameBoard.getBoard());
     }
+
+    public void updateCell(int x, int y) {
+        this.gameBoard.getBoard()[x][y].toggleAlive();
+        this.gameView.updateView(this.gameBoard.getBoard());
+    }
 }

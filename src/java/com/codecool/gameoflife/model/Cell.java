@@ -37,4 +37,8 @@ public class Cell {
     public void setAlive(boolean alive) {
         this.alive = alive;
     }
+
+    public void toggleAlive() {
+        this.alive = !this.alive;
+    }
 }

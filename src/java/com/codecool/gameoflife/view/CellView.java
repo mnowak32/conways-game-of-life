@@ -14,5 +14,8 @@ public class CellView extends Rectangle {
         this.setStroke(Color.BLACK);
         this.setStrokeType(StrokeType.INSIDE);
         this.setFill(color);
+        this.setOnMouseEntered(event -> this.setFill(Color.BLUE));
+        this.setOnMouseExited(event -> this.setFill(color));
     }
+    
 }
