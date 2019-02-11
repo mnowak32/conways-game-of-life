@@ -29,7 +29,13 @@ public class GameBoard {
     }
 
     public void nextGeneration() {
-
+        Cell [][] nextGen = new Cell[this.board.length][this.board[0].length];
+        for (int i = 0; i < nextGen.length; i++) {
+            for (int j = 0; j < nextGen[i].length; j++) {
+                nextGen[i][j] = new Cell(i,j);
+            }
+        }
+        this.board =  nextGen;
     }
 
     /**
@@ -59,6 +65,5 @@ public class GameBoard {
         }
         return aliveCount;
     }
-
 
 }
