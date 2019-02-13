@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.VBox;
@@ -13,18 +14,19 @@ public class SetupView extends VBox {
 
     private Button startButton;
     private Button randomizeButton;
-    private Label speedLabel;
     private Slider speedSlider;
+    private CheckBox borderLessModeToggle;
 
     SetupView() {
         super(10);
         this.setPadding(new Insets(25));
         this.startButton = new Button("Start");
         this.randomizeButton = new Button("Randomize grid");
-        this.speedLabel = new Label("Speed");
+        Label speedLabel = new Label("Speed");
         this.speedSlider = new Slider(0, 400, 200);
         this.speedSlider.setShowTickLabels(true);
-        this.getChildren().addAll(startButton, randomizeButton, speedLabel, speedSlider);
+        this.borderLessModeToggle = new CheckBox("Borderless mode");
+        this.getChildren().addAll(startButton, randomizeButton, speedLabel, speedSlider, borderLessModeToggle);
     }
 
     void setupSlider(ChangeListener<Number> numberChangeListener) {
@@ -38,5 +40,9 @@ public class SetupView extends VBox {
 
     void setupRandomizeButton(EventHandler<ActionEvent> handler) {
         this.randomizeButton.setOnAction(handler);
+    }
+
+    void setupBorderLessToggle(ChangeListener<Boolean> changeListener) {
+        this.borderLessModeToggle.selectedProperty().addListener(changeListener);
     }
 }

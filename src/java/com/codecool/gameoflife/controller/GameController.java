@@ -35,4 +35,8 @@ public class GameController {
         this.gameBoard.getBoard()[x][y].toggleAlive();
         this.gameView.updateView(this.gameBoard.getBoard());
     }
+
+    public void toggleBorderlessMode() {
+        this.gameBoard.toggleBorderLess();
+    }
 }

@@ -2,18 +2,24 @@ package com.codecool.gameoflife.model;
 
 public class GameBoard {
     private Cell[][] board;
+    private boolean borderLess;
 
     public Cell[][] getBoard() {
         return board;
     }
 
     public GameBoard(int boardSide) {
+        this.borderLess = false;
         this.board = new Cell[boardSide][boardSide];
         this.populateTiles();
     }
 
     public GameBoard(Cell[][] board) {
         this.board = board;
+    }
+
+    public void toggleBorderLess() {
+        this.borderLess = !borderLess;
     }
 
     private void populateTiles() {
@@ -65,10 +71,30 @@ public class GameBoard {
             for (int offsetY = -1; offsetY < 2; offsetY++) {
                 int neighborX = cellX + offsetX, neighborY = cellY + offsetY;
 
-                if (neighborX < 0 || neighborX > this.board[0].length - 1||
-                    neighborY < 0 || neighborY > this.board.length - 1 ||
-                    offsetX == 0 && offsetY ==0) {
+                if (offsetX == 0 && offsetY == 0) {
                     continue;
+                }
+
+                if (this.borderLess) {
+
+                    if (neighborX < 0) {
+                        neighborX = this.board.length - 1;
+                    } else if (neighborX > this.board.length - 1) {
+                        neighborX = 0;
+                    }
+
+                    if (neighborY < 0) {
+                        neighborY = this.board[0].length - 1;
+                    } else if (neighborY > this.board[0].length - 1) {
+                        neighborY = 0;
+                    }
+
+                } else {
+
+                    if (neighborX < 0 || neighborX > this.board.length - 1||
+                        neighborY < 0 || neighborY > this.board[0].length - 1) {
+                        continue;
+                    }
                 }
 
                 if (this.board[neighborX][neighborY].isAlive()) {
