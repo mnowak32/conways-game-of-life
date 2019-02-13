@@ -16,6 +16,7 @@ public class SetupView extends VBox {
     private Button randomizeButton;
     private Slider speedSlider;
     private CheckBox borderLessModeToggle;
+    private CheckBox gridVisibleToggle;
 
     SetupView() {
         super(10);
@@ -26,7 +27,8 @@ public class SetupView extends VBox {
         this.speedSlider = new Slider(0, 400, 200);
         this.speedSlider.setShowTickLabels(true);
         this.borderLessModeToggle = new CheckBox("Borderless mode");
-        this.getChildren().addAll(startButton, randomizeButton, speedLabel, speedSlider, borderLessModeToggle);
+        this.gridVisibleToggle = new CheckBox("Grid visible");
+        this.getChildren().addAll(startButton, randomizeButton, speedLabel, speedSlider, borderLessModeToggle, gridVisibleToggle);
     }
 
     void setupSlider(ChangeListener<Number> numberChangeListener) {
@@ -44,5 +46,9 @@ public class SetupView extends VBox {
 
     void setupBorderLessToggle(ChangeListener<Boolean> changeListener) {
         this.borderLessModeToggle.selectedProperty().addListener(changeListener);
+    }
+
+    void setupGridVisibleToggle(ChangeListener<Boolean> changeListener) {
+        this.gridVisibleToggle.selectedProperty().addListener(changeListener);
     }
 }

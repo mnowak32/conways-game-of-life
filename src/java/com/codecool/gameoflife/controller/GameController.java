@@ -1,5 +1,6 @@
 package com.codecool.gameoflife.controller;
 
+import com.codecool.gameoflife.model.Cell;
 import com.codecool.gameoflife.model.GameBoard;
 import com.codecool.gameoflife.view.GameView;
 
@@ -38,5 +39,9 @@ public class GameController {
 
     public void toggleBorderlessMode() {
         this.gameBoard.toggleBorderLess();
+    }
+
+    public Cell[][] getGameBoard() {
+        return this.gameBoard.getBoard();
     }
 }
