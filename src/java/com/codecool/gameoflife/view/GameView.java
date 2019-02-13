@@ -30,8 +30,8 @@ public class GameView extends HBox {
         for (int i = 0; i < gameBoard.length; i++) {
             for (int j = 0; j < gameBoard[i].length; j++) {
                 CellView cellView = new CellView(gameBoard[i][j]);
-                int y = j;
                 int x = i;
+                int y = j;
                 cellView.setOnMousePressed(event -> this.gameController.updateCell(x, y));
                 gameBoardView.add(cellView, i, j);
             }
