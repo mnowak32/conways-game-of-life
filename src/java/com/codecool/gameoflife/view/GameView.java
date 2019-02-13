@@ -21,6 +21,7 @@ public class GameView extends HBox {
         this.setupView.setupSlider((observable, oldValue, newValue) -> this.changeGameSpeed(newValue.intValue()));
         this.setupView.setupBorderLessToggle((observable, oldValue, newValue) -> this.gameController.toggleBorderlessMode());
         this.setupView.setupGridVisibleToggle((observable, oldValue, newValue) -> this.setGridVisible(newValue));
+        this.setupView.setupRulesToggles(gameController);
         this.getChildren().addAll(gameBoardView, setupView);
     }
 

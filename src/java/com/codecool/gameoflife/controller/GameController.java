@@ -2,6 +2,7 @@ package com.codecool.gameoflife.controller;
 
 import com.codecool.gameoflife.model.Cell;
 import com.codecool.gameoflife.model.GameBoard;
+import com.codecool.gameoflife.model.RuleSet;
 import com.codecool.gameoflife.view.GameView;
 
 public class GameController {
@@ -43,5 +44,9 @@ public class GameController {
 
     public Cell[][] getGameBoard() {
         return this.gameBoard.getBoard();
+    }
+
+    public void setRules(RuleSet ruleSet) {
+        this.gameBoard.setRuleSet(ruleSet);
     }
 }

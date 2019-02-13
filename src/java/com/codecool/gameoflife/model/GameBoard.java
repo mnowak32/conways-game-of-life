@@ -1,6 +1,8 @@
 package com.codecool.gameoflife.model;
 
 public class GameBoard {
+
+    private RuleSet rules;
     private Cell[][] board;
     private boolean borderLess;
 
@@ -9,8 +11,13 @@ public class GameBoard {
     }
 
     public GameBoard(int boardSide) {
+        this(boardSide, boardSide);
+    }
+
+    public GameBoard(int width, int height) {
+        this.rules = RuleSet.CLASSIC;
         this.borderLess = false;
-        this.board = new Cell[boardSide][boardSide];
+        this.board = new Cell[height][width];
         this.populateTiles();
     }
 
@@ -51,9 +58,9 @@ public class GameBoard {
     private boolean cellLived(int x, int y) {
         int neighborsNumber = checkNeighbors(x, y);
         if (this.board[x][y].isAlive()) {
-            return neighborsNumber == 2 || neighborsNumber == 3;
+            return this.rules.getAliveRules().contains(neighborsNumber);
         } else {
-            return neighborsNumber == 3;
+            return this.rules.getDeadRules().contains(neighborsNumber);
         }
     }
 
@@ -107,4 +114,7 @@ public class GameBoard {
         return aliveCount;
     }
 
+    public void setRuleSet(RuleSet ruleSet) {
+        this.rules = ruleSet;
+    }
 }

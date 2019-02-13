@@ -1,13 +1,12 @@
 package com.codecool.gameoflife.view;
 
+import com.codecool.gameoflife.controller.GameController;
+import com.codecool.gameoflife.model.RuleSet;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
 public class SetupView extends VBox {
@@ -17,6 +16,7 @@ public class SetupView extends VBox {
     private Slider speedSlider;
     private CheckBox borderLessModeToggle;
     private CheckBox gridVisibleToggle;
+    private ToggleGroup rulesToggle;
 
     SetupView() {
         super(10);
@@ -28,7 +28,19 @@ public class SetupView extends VBox {
         this.speedSlider.setShowTickLabels(true);
         this.borderLessModeToggle = new CheckBox("Borderless mode");
         this.gridVisibleToggle = new CheckBox("Grid visible");
-        this.getChildren().addAll(startButton, randomizeButton, speedLabel, speedSlider, borderLessModeToggle, gridVisibleToggle);
+        this.rulesToggle = new ToggleGroup();
+        this.getChildren().addAll(startButton, randomizeButton, speedLabel, speedSlider,
+                borderLessModeToggle, gridVisibleToggle);
+    }
+
+    void setupRulesToggles(GameController gameController) {
+        for (RuleSet ruleSet : RuleSet.values()) {
+            RadioButton button = new RadioButton(ruleSet.toString());
+            button.setToggleGroup(this.rulesToggle);
+            button.setUserData(ruleSet);
+            button.setOnMouseClicked(event -> gameController.setRules((RuleSet) button.getUserData()));
+            this.getChildren().add(button);
+        }
     }
 
     void setupSlider(ChangeListener<Number> numberChangeListener) {
