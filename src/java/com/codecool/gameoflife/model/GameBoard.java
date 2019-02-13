@@ -31,9 +31,9 @@ public class GameBoard {
     }
 
     public void randomizeBoard() {
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                board[i][j].setAlive(Math.random() > 0.5);
+        for (Cell[] row : board) {
+            for (Cell cell : row) {
+                cell.setAlive(Math.random() > 0.5);
             }
         }
     }
@@ -60,6 +60,8 @@ public class GameBoard {
     /**
      * Checks a neighboring cells and returns a number of alive ones.
      * Excludes the checked cell.
+     * If borderLess field is true it checks the neighbors as if there were no borders
+     * (eg. in board of len 10 board[-1][0] becomes board[9][0])
      * @param cellX - the X position of cell to check
      * @param cellY - the Y position of cell to check
      * @return number of alive cells.
