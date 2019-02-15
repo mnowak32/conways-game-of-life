@@ -22,6 +22,7 @@ public class GameBoard {
     }
 
     public GameBoard(Cell[][] board) {
+        this(board.length, board[0].length);
         this.board = board;
     }
 
