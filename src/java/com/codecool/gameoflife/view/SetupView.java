@@ -36,14 +36,15 @@ public class SetupView extends HBox {
         this.borderLessModeToggle = new CheckBox("Borderless mode");
         this.gridVisibleToggle = new CheckBox("Grid visible");
         this.rulesToggle = new ToggleGroup();
-        Label rulesLabel = new Label("Rules modifications:");
         this.gameSettings.getChildren().addAll(startButton, randomizeButton, clearButton, speedLabel,
                 speedSlider, borderLessModeToggle, gridVisibleToggle);
-        this.rulesSettings.getChildren().add(rulesLabel);
         this.getChildren().addAll(gameSettings, rulesSettings);
     }
 
-    void setupRulesToggles(GameController gameController) {
+    void createRuleButtons(GameController gameController) {
+        this.rulesSettings.getChildren().clear();
+        Label rulesLabel = new Label("Rules modifications:");
+        this.rulesSettings.getChildren().add(rulesLabel);
         for (RuleSet ruleSet : RuleSet.getAllRuleSets()) {
             RadioButton button = new RadioButton(ruleSet.getName());
             button.setToggleGroup(this.rulesToggle);
@@ -51,6 +52,20 @@ public class SetupView extends HBox {
             button.setOnMouseClicked(event -> gameController.setRules((RuleSet) button.getUserData()));
             this.rulesSettings.getChildren().add(button);
         }
+        createCustomRulesForm(gameController);
+    }
+
+    private void createCustomRulesForm(GameController controller) {
+        HBox form = new HBox(5);
+        TextField aliveRules = new TextField();
+        TextField deadRules = new TextField();
+        aliveRules.setPrefColumnCount(5);
+        deadRules.setPrefColumnCount(5);
+        Button addRules = new Button("Add");
+        addRules.setOnAction(event -> controller.addRules("Custom", aliveRules.getText(), deadRules.getText()));
+        form.getChildren().addAll(new Label("Custom:"), aliveRules,
+                new Label("/"), deadRules, addRules);
+        this.rulesSettings.getChildren().add(form);
     }
 
     void setupSlider(ChangeListener<Number> numberChangeListener) {

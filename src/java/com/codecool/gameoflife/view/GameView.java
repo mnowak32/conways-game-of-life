@@ -20,7 +20,7 @@ public class GameView extends HBox {
         this.setupView.setupSlider((observable, oldValue, newValue) -> this.changeGameSpeed(newValue.intValue()));
         this.setupView.setupBorderLessToggle((observable, oldValue, newValue) -> this.gameController.toggleBorderlessMode());
         this.setupView.setupGridVisibleToggle((observable, oldValue, newValue) -> this.setGridVisible(newValue));
-        this.setupView.setupRulesToggles(gameController);
+        this.setupView.createRuleButtons(gameController);
         this.getChildren().addAll(gameBoardView, setupView);
     }
 
@@ -49,5 +49,9 @@ public class GameView extends HBox {
 
     public void updateCell(Cell cellToUpdate, int x, int y) {
         this.gameBoardView.updateSingleCell(cellToUpdate, x, y);
+    }
+
+    public void updateRules() {
+        this.setupView.createRuleButtons(this.gameController);
     }
 }

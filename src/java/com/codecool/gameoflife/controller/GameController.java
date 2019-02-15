@@ -5,6 +5,9 @@ import com.codecool.gameoflife.model.GameBoard;
 import com.codecool.gameoflife.model.RuleSet;
 import com.codecool.gameoflife.view.GameView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameController {
 
     private GameBoard gameBoard;
@@ -54,5 +57,29 @@ public class GameController {
     public void clearBoard() {
         this.gameBoard.populateTiles();
         this.gameView.updateView(this.gameBoard.getBoard());
+    }
+
+    public void addRules(String name, String aliveString, String deadString) {
+        List<Integer> aliveRules = convertRulesToList(aliveString);
+        List<Integer> deadRules = convertRulesToList(deadString);
+        if (deadRules == null || aliveRules == null) {
+            return;
+        }
+        RuleSet.addRuleSet(name, aliveRules, deadRules);
+        this.gameView.updateRules();
+    }
+
+    private List<Integer> convertRulesToList(String rules) {
+        List<Integer> rulesList = new ArrayList<>();
+        String[] rulesArray = rules.split(",");
+        for (String rule : rulesArray) {
+            rule = rule.trim();
+            if (!rule.matches("\\d+")) {
+                return null;
+            }
+            rulesList.add(Integer.parseInt(rule));
+        }
+
+        return rulesList;
     }
 }
