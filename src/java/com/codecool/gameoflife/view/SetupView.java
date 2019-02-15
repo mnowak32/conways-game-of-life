@@ -7,10 +7,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class SetupView extends VBox {
+public class SetupView extends HBox {
 
+    private VBox gameSettings;
+    private VBox rulesSettings;
     private Button startButton;
     private Button randomizeButton;
     private Button clearButton;
@@ -20,7 +23,9 @@ public class SetupView extends VBox {
     private ToggleGroup rulesToggle;
 
     SetupView() {
-        super(10);
+        super(50);
+        this.gameSettings = new VBox(10);
+        this.rulesSettings = new VBox(10);
         this.setPadding(new Insets(25));
         this.startButton = new Button("Start");
         this.randomizeButton = new Button("Randomize grid");
@@ -31,8 +36,11 @@ public class SetupView extends VBox {
         this.borderLessModeToggle = new CheckBox("Borderless mode");
         this.gridVisibleToggle = new CheckBox("Grid visible");
         this.rulesToggle = new ToggleGroup();
-        this.getChildren().addAll(startButton, randomizeButton, clearButton, speedLabel,
+        Label rulesLabel = new Label("Rules modifications:");
+        this.gameSettings.getChildren().addAll(startButton, randomizeButton, clearButton, speedLabel,
                 speedSlider, borderLessModeToggle, gridVisibleToggle);
+        this.rulesSettings.getChildren().add(rulesLabel);
+        this.getChildren().addAll(gameSettings, rulesSettings);
     }
 
     void setupRulesToggles(GameController gameController) {
@@ -41,7 +49,7 @@ public class SetupView extends VBox {
             button.setToggleGroup(this.rulesToggle);
             button.setUserData(ruleSet);
             button.setOnMouseClicked(event -> gameController.setRules((RuleSet) button.getUserData()));
-            this.getChildren().add(button);
+            this.rulesSettings.getChildren().add(button);
         }
     }
 
