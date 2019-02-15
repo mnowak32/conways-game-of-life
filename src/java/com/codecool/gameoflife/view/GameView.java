@@ -2,7 +2,6 @@ package com.codecool.gameoflife.view;
 
 import com.codecool.gameoflife.controller.GameController;
 import com.codecool.gameoflife.model.Cell;
-import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 public class GameView extends HBox {
 

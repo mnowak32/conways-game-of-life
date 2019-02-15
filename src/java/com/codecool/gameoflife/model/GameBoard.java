@@ -15,7 +15,7 @@ public class GameBoard {
     }
 
     public GameBoard(int width, int height) {
-        this.rules = RuleSet.CLASSIC;
+        this.rules = RuleSet.getRuleSet("Classic");
         this.borderLess = false;
         this.board = new Cell[height][width];
         this.populateTiles();

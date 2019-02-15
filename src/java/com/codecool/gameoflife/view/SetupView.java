@@ -44,8 +44,8 @@ public class SetupView extends HBox {
     }
 
     void setupRulesToggles(GameController gameController) {
-        for (RuleSet ruleSet : RuleSet.values()) {
-            RadioButton button = new RadioButton(ruleSet.toString());
+        for (RuleSet ruleSet : RuleSet.getAllRuleSets()) {
+            RadioButton button = new RadioButton(ruleSet.getName());
             button.setToggleGroup(this.rulesToggle);
             button.setUserData(ruleSet);
             button.setOnMouseClicked(event -> gameController.setRules((RuleSet) button.getUserData()));
