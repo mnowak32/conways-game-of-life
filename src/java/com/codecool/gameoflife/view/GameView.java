@@ -2,16 +2,17 @@ package com.codecool.gameoflife.view;
 
 import com.codecool.gameoflife.controller.GameController;
 import com.codecool.gameoflife.model.Cell;
+import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 public class GameView extends HBox {
 
-    private GameBoardView gameBoardView;
+    private GridPaneView gameBoardView;
     private SetupView setupView = new SetupView();
     private GameController gameController;
     private GameLoop gameAnimation;
 
     public GameView(GameController gameController) {
-        this.gameBoardView = new GameBoardView(gameController);
+        this.gameBoardView = new GridPaneView(gameController);
         this.gameController = gameController;
         this.gameAnimation = new GameLoop(200, gameController::nextGeneration);
         this.setupView.setupStartButton(event -> this.startGame(), "Start Game");
@@ -45,5 +46,9 @@ public class GameView extends HBox {
     private void stopGame() {
         this.gameAnimation.stop();
         this.setupView.setupStartButton(event -> this.startGame(), "Start Game");
+    }
+
+    public void updateCell(Cell cellToUpdate, int x, int y) {
+        this.gameBoardView.updateSingleCell(cellToUpdate, x, y);
     }
 }

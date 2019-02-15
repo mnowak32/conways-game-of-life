@@ -34,8 +34,9 @@ public class GameController {
     }
 
     public void updateCell(int x, int y) {
-        this.gameBoard.getBoard()[x][y].toggleAlive();
-        this.gameView.updateView(this.gameBoard.getBoard());
+        Cell cellToUpdate = this.gameBoard.getBoard()[x][y];
+        cellToUpdate.toggleAlive();
+        this.gameView.updateCell(cellToUpdate, x, y);
     }
 
     public void toggleBorderlessMode() {
