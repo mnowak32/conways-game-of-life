@@ -59,14 +59,15 @@ public class GameController {
         this.gameView.updateView(this.gameBoard.getBoard());
     }
 
-    public void addRules(String name, String aliveString, String deadString) {
+    public boolean addRules(String name, String aliveString, String deadString) {
         List<Integer> aliveRules = convertRulesToList(aliveString);
         List<Integer> deadRules = convertRulesToList(deadString);
         if (deadRules == null || aliveRules == null) {
-            return;
+            return false;
         }
         RuleSet.addRuleSet(name, aliveRules, deadRules);
         this.gameView.updateRules();
+        return true;
     }
 
     private List<Integer> convertRulesToList(String rules) {

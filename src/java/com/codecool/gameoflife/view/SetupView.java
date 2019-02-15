@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class SetupView extends HBox {
 
@@ -21,9 +22,11 @@ public class SetupView extends HBox {
     private CheckBox borderLessModeToggle;
     private CheckBox gridVisibleToggle;
     private ToggleGroup rulesToggle;
+    private Text validationResult;
 
     SetupView() {
         super(50);
+        this.validationResult = new Text();
         this.gameSettings = new VBox(10);
         this.rulesSettings = new VBox(10);
         this.setPadding(new Insets(25));
@@ -53,6 +56,7 @@ public class SetupView extends HBox {
             this.rulesSettings.getChildren().add(button);
         }
         createCustomRulesForm(gameController);
+        this.rulesSettings.getChildren().add(this.validationResult);
     }
 
     private void createCustomRulesForm(GameController controller) {
@@ -62,7 +66,14 @@ public class SetupView extends HBox {
         aliveRules.setPrefColumnCount(5);
         deadRules.setPrefColumnCount(5);
         Button addRules = new Button("Add");
-        addRules.setOnAction(event -> controller.addRules("Custom", aliveRules.getText(), deadRules.getText()));
+        addRules.setOnAction(event -> {
+            boolean success = controller.addRules("Custom", aliveRules.getText(), deadRules.getText());
+            if (success) {
+                this.validationResult.setText("Added new custom rules.");
+            } else {
+                this.validationResult.setText("Wrong rules format");
+            }
+        });
         form.getChildren().addAll(new Label("Custom:"), aliveRules,
                 new Label("/"), deadRules, addRules);
         this.rulesSettings.getChildren().add(form);
