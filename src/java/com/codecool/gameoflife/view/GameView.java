@@ -2,18 +2,16 @@ package com.codecool.gameoflife.view;
 
 import com.codecool.gameoflife.controller.GameController;
 import com.codecool.gameoflife.model.Cell;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 public class GameView extends HBox {
 
-    private GridPane gameBoardView = new GridPane();
+    private GameBoardView gameBoardView;
     private SetupView setupView = new SetupView();
     private GameController gameController;
     private GameLoop gameAnimation;
-    private boolean gridOn;
 
     public GameView(GameController gameController) {
-        this.gridOn = false;
+        this.gameBoardView = new GameBoardView(gameController);
         this.gameController = gameController;
         this.gameAnimation = new GameLoop(200, gameController::nextGeneration);
         this.setupView.setupStartButton(event -> this.startGame(), "Start Game");
@@ -30,21 +28,12 @@ public class GameView extends HBox {
     }
 
     private void setGridVisible(boolean visible) {
-        this.gridOn = visible;
+        this.gameBoardView.setGridOn(visible);
         this.updateView(this.gameController.getGameBoard());
     }
 
     public void updateView(Cell[][] gameBoard) {
-        gameBoardView.getChildren().clear();
-        for (int i = 0; i < gameBoard.length; i++) {
-            for (int j = 0; j < gameBoard[i].length; j++) {
-                CellView cellView = new CellView(gameBoard[i][j], this.gridOn);
-                int x = i;
-                int y = j;
-                cellView.setOnMousePressed(event -> this.gameController.updateCell(x, y));
-                gameBoardView.add(cellView, i, j);
-            }
-        }
+        this.gameBoardView.updateCells(gameBoard);
     }
 
     private void startGame() {
