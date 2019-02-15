@@ -8,16 +8,21 @@ import javafx.scene.shape.StrokeType;
 
 public class CellView extends Rectangle {
 
-    public CellView(Cell cell, boolean gridOn) {
+    public CellView(Cell cell) {
         super(DisplayConfig.CELL_SIDE, DisplayConfig.CELL_SIDE);
-        Color color = cell.isAlive() ? Color.RED : Color.WHITE;
-        if (gridOn) {
-            this.setStroke(Color.BLACK);
-            this.setStrokeType(StrokeType.INSIDE);
-        }
-        this.setFill(color);
+        this.setStrokeType(StrokeType.INSIDE);
         this.setOnMouseEntered(event -> this.setFill(Color.BLUE));
-        this.setOnMouseExited(event -> this.setFill(color));
+        this.update(cell, false);
     }
 
+    public void update(Cell cell, boolean gridOn) {
+        Color color = cell.isAlive() ? DisplayConfig.ALIVE_COLOR : DisplayConfig.DEAD_COLOR;
+        if (gridOn) {
+            this.setStroke(Color.BLACK);
+        } else {
+            this.setStroke(Color.TRANSPARENT);
+        }
+        this.setFill(color);
+        this.setOnMouseExited(event -> this.setFill(color));
+    }
 }

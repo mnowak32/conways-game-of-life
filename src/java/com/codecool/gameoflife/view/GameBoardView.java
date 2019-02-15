@@ -20,7 +20,7 @@ public class GameBoardView extends GridPane {
     private void createCells(Cell[][] gameBoard, GameController controller) {
         for (int i = 0; i < gameBoard.length; i++) {
             for (int j = 0; j < gameBoard[i].length; j++) {
-                cells[i][j] = new CellView(gameBoard[i][j]);
+                cells[i][j] = new CellView(gameBoard[i][j], gridOn);
                 int x = i;
                 int y = j;
                 cells[i][j].setOnMousePressed(event -> controller.updateCell(x, y));
