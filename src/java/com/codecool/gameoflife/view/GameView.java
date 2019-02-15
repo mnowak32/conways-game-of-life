@@ -16,6 +16,7 @@ public class GameView extends HBox {
         this.gameAnimation = new GameLoop(200, gameController::nextGeneration);
         this.setupView.setupStartButton(event -> this.startGame(), "Start Game");
         this.setupView.setupRandomizeButton(event -> this.gameController.randomizeGrid());
+        this.setupView.setupClearButton(event -> this.gameController.clearBoard());
         this.setupView.setupSlider((observable, oldValue, newValue) -> this.changeGameSpeed(newValue.intValue()));
         this.setupView.setupBorderLessToggle((observable, oldValue, newValue) -> this.gameController.toggleBorderlessMode());
         this.setupView.setupGridVisibleToggle((observable, oldValue, newValue) -> this.setGridVisible(newValue));

@@ -13,6 +13,7 @@ public class SetupView extends VBox {
 
     private Button startButton;
     private Button randomizeButton;
+    private Button clearButton;
     private Slider speedSlider;
     private CheckBox borderLessModeToggle;
     private CheckBox gridVisibleToggle;
@@ -23,14 +24,15 @@ public class SetupView extends VBox {
         this.setPadding(new Insets(25));
         this.startButton = new Button("Start");
         this.randomizeButton = new Button("Randomize grid");
+        this.clearButton = new Button("Clear");
         Label speedLabel = new Label("Speed");
         this.speedSlider = new Slider(0, 400, 200);
         this.speedSlider.setShowTickLabels(true);
         this.borderLessModeToggle = new CheckBox("Borderless mode");
         this.gridVisibleToggle = new CheckBox("Grid visible");
         this.rulesToggle = new ToggleGroup();
-        this.getChildren().addAll(startButton, randomizeButton, speedLabel, speedSlider,
-                borderLessModeToggle, gridVisibleToggle);
+        this.getChildren().addAll(startButton, randomizeButton, clearButton, speedLabel,
+                speedSlider, borderLessModeToggle, gridVisibleToggle);
     }
 
     void setupRulesToggles(GameController gameController) {
@@ -54,6 +56,10 @@ public class SetupView extends VBox {
 
     void setupRandomizeButton(EventHandler<ActionEvent> handler) {
         this.randomizeButton.setOnAction(handler);
+    }
+
+    void setupClearButton(EventHandler<ActionEvent> handler) {
+        this.clearButton.setOnAction(handler);
     }
 
     void setupBorderLessToggle(ChangeListener<Boolean> changeListener) {

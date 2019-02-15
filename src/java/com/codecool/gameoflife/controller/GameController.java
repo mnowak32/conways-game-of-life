@@ -49,4 +49,9 @@ public class GameController {
     public void setRules(RuleSet ruleSet) {
         this.gameBoard.setRuleSet(ruleSet);
     }
+
+    public void clearBoard() {
+        this.gameBoard.populateTiles();
+        this.gameView.updateView(this.gameBoard.getBoard());
+    }
 }
