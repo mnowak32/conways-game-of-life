@@ -1,7 +1,6 @@
 package com.codecool.gameoflife.view
 
 import com.codecool.gameoflife.controller.GameController
-import com.codecool.gameoflife.model.Cell
 import javafx.beans.value.ChangeListener
 import javafx.event.EventHandler
 import javafx.scene.layout.HBox
@@ -34,7 +33,7 @@ class GameView(private val gameController: GameController) : HBox() {
         updateView(gameController.gameBoard.board)
     }
 
-    fun updateView(gameBoard: Array<Array<Cell>>) {
+    fun updateView(gameBoard: Array<Array<Boolean>>) {
         gameBoardView.updateCells(gameBoard)
     }
 

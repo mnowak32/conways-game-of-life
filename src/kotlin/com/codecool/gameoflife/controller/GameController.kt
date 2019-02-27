@@ -23,8 +23,7 @@ class GameController(public val gameBoard: GameBoard) {
     }
 
     fun updateCell(x: Int, y: Int) {
-        val cellToUpdate = gameBoard.board[x][y]
-        cellToUpdate.toggleAlive()
+        gameBoard.board[x][y] = !gameBoard.board[x][y]
         gameView.updateCell(x, y)
     }
 

@@ -1,7 +1,6 @@
 package com.codecool.gameoflife.view
 
 import com.codecool.gameoflife.controller.GameController
-import com.codecool.gameoflife.model.Cell
 import javafx.event.EventHandler
 import javafx.scene.layout.GridPane
 
@@ -23,7 +22,7 @@ class GridPaneView(private val controller: GameController) : GridPane() {
         } }
     }
 
-    fun updateCells(gameBoard: Array<Array<Cell>>) {
+    fun updateCells(gameBoard: Array<Array<Boolean>>) {
         for (i in gameBoard.indices) {
             for (j in gameBoard[i].indices) {
                 updateSingleCell(i, j)

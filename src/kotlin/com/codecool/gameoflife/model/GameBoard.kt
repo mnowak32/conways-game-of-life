@@ -8,7 +8,7 @@ class GameBoard(val width: Int, val height: Int) {
 
     constructor(boardSide: Int) : this(boardSide, boardSide)
 
-    private fun newBoard() = Array(height) { Array(width) { Cell() } }
+    private fun newBoard() = Array(height) { Array(width) { false } }
 
     fun toggleBorderLess() {
         this.borderLess = !borderLess
@@ -20,8 +20,8 @@ class GameBoard(val width: Int, val height: Int) {
 
     fun randomizeBoard() {
         for (row in board) {
-            for (cell in row) {
-                cell.isAlive = Math.random() > 0.5
+            for (cellId in row.indices) {
+                row[cellId] = Math.random() > 0.5
             }
         }
     }
@@ -30,7 +30,7 @@ class GameBoard(val width: Int, val height: Int) {
         val nextGen = newBoard()
         for (i in nextGen.indices) {
             for (j in nextGen[i].indices) {
-                nextGen[i][j] = Cell(cellLived(i, j))
+                nextGen[i][j] = cellLived(i, j)
             }
         }
         board = nextGen
@@ -38,23 +38,20 @@ class GameBoard(val width: Int, val height: Int) {
 
     private fun cellLived(x: Int, y: Int): Boolean {
         val neighborsNumber = checkNeighbors(x, y)
-        return if (board[x][y].isAlive) {
+        return if (board[x][y]) {
             rules.aliveRules
         } else {
             rules.deadRules
         }.contains(neighborsNumber)
     }
 
-    private infix fun Int.modulo(d: Int) = if (d == 0 || d == 1) {
-        0
-    } else {
-        var mutableThis = this
-        while (mutableThis < 0) mutableThis += d
-        while (mutableThis >= d) mutableThis -= d
-        mutableThis
+    private infix fun Int.modulo(d: Int): Int {
+        // Don't check for a division by 0, "%" operator will throw an exception in that case.
+        val rem = this % d
+        return if (rem < 0) rem + d else rem
     }
 
-    private fun cellAt(xy: Pair<Int, Int>): Cell? {
+    private fun cellAt(xy: Pair<Int, Int>): Boolean? {
         return if (borderLess) {
             val truX = xy.first modulo width
             val truY = xy.second modulo height
@@ -79,8 +76,7 @@ class GameBoard(val width: Int, val height: Int) {
      */
     private fun checkNeighbors(cellX: Int, cellY: Int) = neighbourCoords
             .map { it.first + cellX to it.second + cellY}
-            .mapNotNull { cellAt(it) }
-            .count { it.isAlive }
+            .count { cellAt(it) == true }
 
     fun setRuleSet(ruleSet: RuleSet) {
         this.rules = ruleSet

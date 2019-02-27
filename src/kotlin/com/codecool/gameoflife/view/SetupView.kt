@@ -46,6 +46,7 @@ class SetupView : HBox(50.0) {
             setAll(Label("Rules modifications:"))
             RuleSet.ruleSets.values.forEach { rs ->
                 add(RadioButton(rs.name).apply {
+                    isSelected = (rs.name == RuleSet.defaultRulesetName)
                     toggleGroup = rulesToggle
                     userData = rs
                     setOnMouseClicked { gameController.setRules(this.userData as RuleSet) }
@@ -65,10 +66,10 @@ class SetupView : HBox(50.0) {
         val addRules = Button("Add")
         addRules.setOnAction {
             val success = controller.addRules("Custom", aliveRules.text, deadRules.text)
-            if (success) {
-                validationResult.text = "Added new custom rules."
+            validationResult.text = if (success) {
+                "Added new custom rules."
             } else {
-                validationResult.text = "Wrong rules format"
+                "Wrong rules format"
             }
         }
         form.children.addAll(Label("Custom:"), aliveRules,
